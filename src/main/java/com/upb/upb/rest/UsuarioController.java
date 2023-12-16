@@ -23,21 +23,21 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
 
-    @GetMapping("/{nombreUsuario}/{password}")
+    //@GetMapping("/{nombreUsuario}/{password}")
+    @GetMapping("/findAllUsers")
     public ResponseEntity<?> usuarioFindAll(
-            @PathVariable String nombreUsuario,
-            @PathVariable String password){
+            //@PathVariable String nombreUsuario,
+            //@PathVariable String password
+            ){
         try{
             log .info("Solicitud de acceso por usuario");
-            return ok(usuarioService.findByUsernameAndPassword(nombreUsuario, password));
+            return ok(usuarioService.findAllUsers());
         } catch (Exception e){
             log.info("Error inesperado {}", e);
             log.error("Errorrr XDDDD");
 
             Map<String, Object> responseBody = new HashMap<>();
-            responseBody.put("mensaje", "Usuario " + nombreUsuario + " no encontrado");
-            responseBody.put("status", HttpStatus.NOT_FOUND.value() + " " + HttpStatus.NOT_FOUND.getReasonPhrase());
-
+            responseBody.put("mensaje", "Error en busqueda de usuarios");
             return ResponseEntity.badRequest().body(null);
         }
     }
