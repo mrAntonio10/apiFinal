@@ -54,13 +54,45 @@ public class UpbGestionApplication implements CommandLineRunner {
 //		}
 
 		//EVENTOS CON USUARIOS
-		Usuario usuario = new Usuario();
-		usuario.setNombreUsuario("admin2");
-		usuario.setPassword("password2");
-		usuario.setNombreCompleto("Administrador de Sistema2");
-		usuario.setEstado(false);
+		Usuario usuario1 = new Usuario();
+		usuario1.setNombreUsuario("admin2");
+		usuario1.setPassword("password2");
+		usuario1.setNombreCompleto("Gerente de Sistema");
+		usuario1.setEstado(false);
 
-		usuarioRepository.save(usuario);
+		usuarioRepository.save(usuario1);
+
+		Usuario usuario2 = new Usuario();
+		usuario2.setNombreUsuario("admin3");
+		usuario2.setPassword("123456");
+		usuario2.setNombreCompleto("Financiero");
+		usuario2.setEstado(false);
+
+		usuarioRepository.save(usuario2);
+
+		Usuario usuario3 = new Usuario();
+		usuario3.setNombreUsuario("admin4");
+		usuario3.setPassword("123");
+		usuario3.setNombreCompleto("Analista de datos");
+		usuario3.setEstado(false);
+
+		usuarioRepository.save(usuario3);
+
+		Usuario usuario4 = new Usuario();
+		usuario4.setNombreUsuario("admin5");
+		usuario4.setPassword("marcoloco");
+		usuario4.setNombreCompleto("Administrador de empresas");
+		usuario4.setEstado(false);
+
+		usuarioRepository.save(usuario4);
+
+		Usuario usuario5 = new Usuario();
+		usuario4.setNombreUsuario("admin6");
+		usuario4.setPassword("martinloco");
+		usuario4.setNombreCompleto("Sistemas de sistemas");
+		usuario4.setEstado(false);
+
+		usuarioRepository.save(usuario5);
 
 		Evento evento = new Evento();
 		evento.setEstadoEvento(false);
@@ -69,7 +101,8 @@ public class UpbGestionApplication implements CommandLineRunner {
 		evento.setHoraEvento(LocalTime.of(12,30,20));
 		evento.setNombreEvento("ComiLona");
 		evento.setDescription("Se va a realizar una comilona de choripanesss");
-				evento.setUsuario(usuario);
+		evento.setUsuario(usuario1);
+		evento.setUsuario(usuario2);
 
 		eventoRepository.save(evento);
 	}
