@@ -1,5 +1,3 @@
-import {Vivero, ViveroI} from "../vivero/vivero";
-
 export class Usuario {
 
   nombre: string = '';
@@ -19,7 +17,6 @@ export interface UsuarioI {
   nombreCompleto: string;
   rol: number;
   estado: boolean;
-  vivero: ViveroI;
 
 
 }

@@ -1,4 +1,4 @@
-export class Arduino {
+export class Evento {
 
   id: number = 0;
   nombre: string = "";
@@ -9,7 +9,7 @@ export class Arduino {
 
 }
 
-export interface ArduinoI {
+export interface EventoI {
 
   id: number;
   parametro: number;
