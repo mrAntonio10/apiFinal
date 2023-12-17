@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Usuario} from "../../model/usuario/usuario";
+import {Usuario, UsuarioI} from "../../model/usuario/usuario";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +20,7 @@ export class UsuarioService {
 //     return this.httpClient.post<ArduinoI>(`${this.baseUrl}`, arduino);
 //   }
 
-
+  logInUsuario (usuario: UsuarioI): Observable<UsuarioI> {
+    return this.httpClient.post<UsuarioI>(`${this.baseUrl}/login`, usuario);
+  }
 }

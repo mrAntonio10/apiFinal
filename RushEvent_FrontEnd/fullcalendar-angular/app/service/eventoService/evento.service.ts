@@ -20,7 +20,7 @@ export class EventoService {
     return this.httpClient.get<Evento[]>(`${this.baseUrl}/`+id)
   }
 
-  updateArduino(evento: EventoI): Observable<EventoI> {
-    return this.httpClient.post<EventoI>(`${this.baseUrl}`, evento);
+  postEventoById(parametro: EventoI): Observable<Evento[]> {
+    return this.httpClient.post<Evento[]>(`${this.baseUrl}`, parametro);
   }
 }
