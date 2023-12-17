@@ -16,3 +16,23 @@ export interface EventoI {
   parametroMin: number;
 
 }
+
+
+/*
+
+ private Long id;
+
+    private String nombreEvento;
+
+    private String description;
+
+    private LocalDate fechaEvento;
+
+    private LocalDate fechaFinEvento;
+
+    private LocalTime horaEvento;
+
+    private boolean estadoEvento;
+
+    private Usuario usuario;
+ */
