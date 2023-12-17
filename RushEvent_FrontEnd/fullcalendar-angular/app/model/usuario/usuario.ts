@@ -1,27 +1,22 @@
 export class Usuario {
 
-  nombre: string = '';
-  password = '';
-  nombreCompleto = '';
-  rol: number = 0;
+  id: number = 0;
+  nombreUsuario: string = '';
+  password: string = '';
+  nombreCompleto: string = '';
   estado: boolean = false;
-  vivero: number = 0;
-
-
 }
 
 export interface UsuarioI {
-
-  nombre: string;
+  id: number;
+  nombreUsuario: string;
   password: string;
   nombreCompleto: string;
-  rol: number;
   estado: boolean;
-
-
 }
 
 export interface LoginI {
   nombre: string;
   password: string;
 }
+

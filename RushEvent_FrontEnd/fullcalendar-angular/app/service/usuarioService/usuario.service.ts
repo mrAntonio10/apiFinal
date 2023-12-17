@@ -15,9 +15,10 @@ export class UsuarioService {
   getUserList(): Observable<Usuario[]>{
       return this.httpClient.get<Usuario[]>(`${this.baseUrl}/findAllUsers`)
   }
-
 //ejemplo de post
 //   updateArduino(arduino: ArduinoI): Observable<ArduinoI> {
 //     return this.httpClient.post<ArduinoI>(`${this.baseUrl}`, arduino);
 //   }
+
+
 }
