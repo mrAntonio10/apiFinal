@@ -23,7 +23,6 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
 
-    //@GetMapping("/{nombreUsuario}/{password}")
     @GetMapping("/findAllUsers")
     public ResponseEntity<?> usuarioFindAll(
             //@PathVariable String nombreUsuario,
@@ -32,17 +31,22 @@ public class UsuarioController {
         try{
             log .info("Solicitud de acceso por usuario");
             return ok(usuarioService.findAllUsers());
-        } catch (Exception e){
+        } catch (NullPointerException e){
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("mensaje", "Error en busqueda de usuarios");
+            responseBody.put("status",  HttpStatus.NOT_FOUND.value() + " " + HttpStatus.NOT_FOUND.getReasonPhrase());
+            return ResponseEntity.badRequest().body(responseBody);
+        }
+        catch (Exception e){
             log.info("Error inesperado {}", e);
-            log.error("Errorrr XDDDD");
 
             Map<String, Object> responseBody = new HashMap<>();
             responseBody.put("mensaje", "Error en busqueda de usuarios");
-            return ResponseEntity.badRequest().body(null);
+            return ResponseEntity.badRequest().body(responseBody);
         }
     }
     @PostMapping("/logIn")
-    ResponseEntity<Long> logIn(@RequestBody Usuario usuario) {
+    ResponseEntity<?> logIn(@RequestBody Usuario usuario) {
         try {
             return ok(usuarioService.findByUsernameAndPassword(usuario.getNombreUsuario(), usuario.getPassword()));
         }catch (Exception e){
@@ -54,11 +58,11 @@ public class UsuarioController {
             responseBody.put("mensaje", "Usuario " + usuario.getNombreUsuario() + " no encontrado");
             responseBody.put("status", HttpStatus.NOT_FOUND.value() + " " + HttpStatus.NOT_FOUND.getReasonPhrase());
 
-            return ResponseEntity.badRequest().body(null);
+            return ResponseEntity.badRequest().body(responseBody);
         }
     }
     @PostMapping("")
-    ResponseEntity<Long> guardarUsuario(@RequestBody Usuario usuarioNuevo) {
+    ResponseEntity<?> guardarUsuario(@RequestBody Usuario usuarioNuevo) {
         try {
             return ok(usuarioService.save(usuarioNuevo));
         }catch (Exception e){
@@ -69,7 +73,7 @@ public class UsuarioController {
             responseBody.put("status", HttpStatus.CONFLICT.value() + " " + HttpStatus.CONFLICT.getReasonPhrase());
             responseBody.put("catch", e);
 
-            return ResponseEntity.badRequest().body(null);
+            return ResponseEntity.badRequest().body(responseBody);
         }
     }
     @PutMapping("")

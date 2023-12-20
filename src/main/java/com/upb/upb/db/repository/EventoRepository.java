@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventoRepository extends JpaRepository<Evento, Long> {
-    Optional<Evento> getEventoById(@Param("id") long id);
+    @Query(" SELECT e FROM Evento e " +
+            " INNER JOIN FETCH e.usuario u" +
+            " WHERE u.estado = false AND e.estadoEvento = false AND e.id =:id")
+    Optional<Evento> getEventoByIdAndEstadoFalse(@Param("id") long id);
     @Query(" SELECT e FROM Evento e " +
             " INNER JOIN FETCH e.usuario u" +
             " WHERE u.estado = false AND e.estadoEvento = false")

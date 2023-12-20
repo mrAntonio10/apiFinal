@@ -1,14 +1,14 @@
 package com.upb.upb.db.service;
 
-import com.upb.upb.db.model.Evento;
+import com.upb.upb.dto.EventoDto;
+import com.upb.upb.request.EventoRequest;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface EventoService {
-    List<Evento> getEventosByEstadoEventoFalse();
+    List<EventoDto> getEventosByEstadoEventoFalse();
 
-    Optional<Evento> getEventoById(Long id);
-    Long save(Evento Evento);
+    EventoDto getEventoById(Long id) throws Exception;
+    Long save(EventoRequest eventoDto);
 
 }

@@ -1,6 +1,7 @@
 package com.upb.upb.rest;
 
 import com.upb.upb.db.service.EventoService;
+import com.upb.upb.request.EventoRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -23,7 +25,7 @@ public class EventoController {
     @GetMapping("")
     public ResponseEntity<?> eventoFindAll(){
         try{
-            log .info("Listando todos los eventos");
+            log .info("Ingresando al servicio listar todos los eventos");
             return ok(eventoService.getEventosByEstadoEventoFalse());
         } catch (Exception e){
             log.info("Error inesperado {}", e);
@@ -32,7 +34,76 @@ public class EventoController {
             responseBody.put("mensaje", "Eventos no encontrados");
             responseBody.put("status", HttpStatus.NOT_FOUND.value() + " " + HttpStatus.NOT_FOUND.getReasonPhrase());
 
-            return ResponseEntity.badRequest().body(null);
+            return ResponseEntity.badRequest().body(responseBody);
+        }
+    }
+
+    @GetMapping("/{idEvento}")
+    public ResponseEntity<?> eventoFindById(@PathVariable("idEvento") Long id){
+        try{
+            log .info("Ingresando al servicio listar evento por id: "+id);
+            return ok(eventoService.getEventoById(id));
+        } catch (NoSuchElementException e){
+            log.info("Error inesperado {}", e);
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("mensaje", "Evento con id: "+ id +" no encontrado");
+            responseBody.put("status", HttpStatus.NOT_FOUND.value() + " " + HttpStatus.NOT_FOUND.getReasonPhrase());
+
+            return ResponseEntity.badRequest().body(responseBody);
+        }
+        catch (Exception e){
+            log.info("Error inesperado {}", e);
+
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("mensaje", "Error inesperado");
+            responseBody.put("status", HttpStatus.NOT_FOUND.value() + " " + HttpStatus.NOT_FOUND.getReasonPhrase());
+
+            return ResponseEntity.badRequest().body(responseBody);
+        }
+    }
+
+    @PostMapping("")
+    public ResponseEntity<?> insertEvent(@RequestBody EventoRequest eventoDto){
+        try{
+            log.info("Ingresan al servicio guardar nuevo evento");
+            return ok(eventoService.save(eventoDto));
+        } catch (NoSuchElementException e){
+            log.info("Error inesperado en insertar evento{}", e);
+
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("mensaje", "No se pudo cargar el evento, usuario con id: "+eventoDto.getUsuarioId()+" no encontrado");
+            responseBody.put("status", HttpStatus.NOT_FOUND.value() + " "+HttpStatus.NOT_FOUND.getReasonPhrase());
+            return ResponseEntity.badRequest().body(responseBody);
+        }
+        catch (Exception e){
+            log.info("Error inesperado en insertar evento{}", e);
+
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("mensaje", "No se pudo cargar el evento ni identificar el error");
+            return ResponseEntity.badRequest().body(responseBody);
+        }
+    }
+
+    @PutMapping("")
+    public ResponseEntity<?> updateEvent(@RequestBody EventoRequest eventoDto){
+        try{
+            log.info("Ingresan al servicio guardar nuevo evento");
+            return ok(eventoService.save(eventoDto));
+        } catch (NoSuchElementException e){
+            log.info("Error inesperado en insertar evento{}", e);
+
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("mensaje", "No se pudo cargar el evento, usuario con id: "+eventoDto.getUsuarioId()+" no encontrado");
+            responseBody.put("status", HttpStatus.NOT_FOUND.value() + " "+HttpStatus.NOT_FOUND.getReasonPhrase());
+            return ResponseEntity.badRequest().body(responseBody);
+        }
+        catch (Exception e){
+            log.info("Error inesperado en insertar evento{}", e);
+
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("mensaje", "No se pudo cargar el evento ni identificar el error");
+            return ResponseEntity.badRequest().body(responseBody);
         }
     }
 }
+
