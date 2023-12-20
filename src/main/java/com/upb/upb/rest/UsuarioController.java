@@ -2,6 +2,7 @@ package com.upb.upb.rest;
 
 import com.upb.upb.db.model.Usuario;
 import com.upb.upb.db.service.UsuarioService;
+import com.upb.upb.request.UsuarioRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,8 +47,9 @@ public class UsuarioController {
         }
     }
     @PostMapping("/logIn")
-    ResponseEntity<?> logIn(@RequestBody Usuario usuario) {
+    ResponseEntity<?> logIn(@RequestBody UsuarioRequest usuario) {
         try {
+            log.info("DATOS " +usuario.getNombreUsuario()+" y "+ usuario.getPassword());
             return ok(usuarioService.findByUsernameAndPassword(usuario.getNombreUsuario(), usuario.getPassword()));
         }catch (Exception e){
             log.info("Error inesperado {}", e);

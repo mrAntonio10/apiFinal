@@ -21,6 +21,6 @@ export class UsuarioService {
 //   }
 
   logInUsuario (usuario: UsuarioI): Observable<UsuarioI> {
-    return this.httpClient.post<UsuarioI>(`${this.baseUrl}/login`, usuario);
+    return this.httpClient.post<UsuarioI>(`${this.baseUrl}/logIn`,  usuario);
   }
 }

@@ -1,0 +1,28 @@
+<div class="box fondo">
+  <div class="container">
+
+    <div class="top">
+      <span>¿Listo para otro nuevo día?</span>
+      <header>Iniciar Sesión</header>
+
+    </div>
+
+    <form autocomplete="off" [formGroup]="form">
+      <div class="input-field">
+        <input type="text" class="input" placeholder="Nombre de Usuario" name="nombre_usuario_administrador"  formControlName="nombreUsuario">
+        <i class='bx bx-user'></i>
+      </div>
+
+      <div class="input-field">
+        <input type="Password" class="input" placeholder="Contraseña" name="password"  formControlName="password">
+        <i class='bx bx-lock-alt'></i>
+      </div>
+
+      <div class="input-field">
+        <input type="submit" class="submit" value="Iniciar Sesión" (click)="submitForm()"  [disabled]="!form.valid">
+      </div>
+    </form>
+
+  </div>
+</div>
+

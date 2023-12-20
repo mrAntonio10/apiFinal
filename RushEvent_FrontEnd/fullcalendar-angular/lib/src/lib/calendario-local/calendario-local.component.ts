@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild, forwardRef } from '@angular/core';
-import { CalendarOptions, Calendar, EventClickArg } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin, { DateClickArg, EventDragStopArg } from '@fullcalendar/interaction';
-import { FullCalendarComponent } from '@fullcalendar/angular';
+import {Component, forwardRef, OnInit, ViewChild} from '@angular/core';
+import {Calendar, CalendarOptions, EventClickArg} from "@fullcalendar/core";
+import {FullCalendarComponent} from "@fullcalendar/angular";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin, {DateClickArg, EventDragStopArg} from "@fullcalendar/interaction";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'lib-calendario-local',
+  templateUrl: './calendario-local.component.html',
+  styleUrls: ['./calendario-local.component.css']
 })
-export class AppComponent implements OnInit {
+export class CalendarioLocalComponent implements OnInit {
 
   calendarOptions?: CalendarOptions;
   eventsModel: any;
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
     const yearMonth = nowDate.getUTCFullYear() + '-' + (nowDate.getUTCMonth() + 1);
 
     this.calendarOptions!.events = [{
-      title: 'Updated Event',
+      title: 'Evento Coca Cola Fest',
       start: yearMonth + '-08',
       end: yearMonth + '-10'
     }];

@@ -8,11 +8,11 @@ export class Usuario {
 }
 
 export interface UsuarioI {
-  id: number;
+  // id: number;
   nombreUsuario: string;
   password: string;
-  nombreCompleto: string;
-  estado: boolean;
+  // nombreCompleto: string;
+  // estado: boolean;
 }
 
 export interface LoginI {
