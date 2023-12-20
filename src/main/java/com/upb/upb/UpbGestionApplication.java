@@ -105,6 +105,57 @@ public class UpbGestionApplication implements CommandLineRunner {
 		evento.setUsuario(usuario2);
 
 		eventoRepository.save(evento);
+
+		Evento evento1 = new Evento();
+		evento1.setEstadoEvento(false);
+		evento1.setFechaEvento(LocalDate.of(2021, Month.JANUARY, 1));
+		evento1.setFechaFinEvento(LocalDate.of(2021, Month.JANUARY, 20));
+		evento1.setHoraEvento(LocalTime.of(12,30,20));
+		evento1.setNombreEvento("ComiLona");
+		evento1.setDescription("Se va a realizar una comilona de choripanesss");
+		evento1.setUsuario(usuario1);
+		evento1.setUsuario(usuario2);
+
+		eventoRepository.save(evento1);
+
+		Evento evento2 = new Evento();
+		evento2.setEstadoEvento(false);
+		evento2.setFechaEvento(LocalDate.of(2021, Month.DECEMBER, 20));
+		evento2.setFechaFinEvento(LocalDate.of(2021, Month.DECEMBER, 20));
+		evento2.setHoraEvento(LocalTime.of(20,30,0));
+		evento2.setNombreEvento("Cumple Justin");
+		evento2.setDescription("Junte en su casa a las 8:30 pm");
+		evento2.setUsuario(usuario5);
+
+		eventoRepository.save(evento2);
+
+		Evento evento3 = new Evento();
+		evento3.setEstadoEvento(false);
+		evento3.setFechaEvento(LocalDate.of(2021, Month.DECEMBER, 22));
+		evento3.setFechaFinEvento(LocalDate.of(2021, Month.DECEMBER, 23));
+		evento3.setHoraEvento(LocalTime.of(20,30,0));
+		evento3.setNombreEvento("Cena Navideña");
+		evento3.setDescription("Junte en la casa de Nicolas");
+		evento3.setUsuario(usuario1);
+		evento3.setUsuario(usuario2);
+		evento3.setUsuario(usuario3);
+		evento3.setUsuario(usuario4);
+		evento3.setUsuario(usuario5);
+
+		eventoRepository.save(evento3);
+
+		Evento evento4 = new Evento();
+		evento4.setEstadoEvento(false);
+		evento4.setFechaEvento(LocalDate.of(2021, Month.JANUARY, 1));
+		evento4.setFechaFinEvento(LocalDate.of(2021, Month.JANUARY, 20));
+		evento4.setHoraEvento(LocalTime.of(12,30,0));
+		evento4.setNombreEvento("Cine en Ventura Mall");
+		evento4.setDescription("Salir a ver una peli con los amigos");
+		evento4.setUsuario(usuario1);
+		evento4.setUsuario(usuario5);
+		evento4.setUsuario(usuario4);
+
+		eventoRepository.save(evento4);
 	}
 
 
