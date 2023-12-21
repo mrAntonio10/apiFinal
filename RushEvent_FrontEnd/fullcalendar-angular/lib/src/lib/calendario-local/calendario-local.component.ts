@@ -3,6 +3,7 @@ import {Calendar, CalendarOptions, EventClickArg} from "@fullcalendar/core";
 import {FullCalendarComponent} from "@fullcalendar/angular";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin, {DateClickArg, EventDragStopArg} from "@fullcalendar/interaction";
+import {EventoService} from "../service/eventoService/evento.service";
 
 @Component({
   selector: 'lib-calendario-local',
@@ -66,9 +67,27 @@ export class CalendarioLocalComponent implements OnInit {
     };
   }
 
+  constructor(private eventoService: EventoService) {
+  }
   updateEvents() {
     const nowDate = new Date();
     const yearMonth = nowDate.getUTCFullYear() + '-' + (nowDate.getUTCMonth() + 1);
+
+    this.eventoService.getAll().subscribe(data => {
+      console.log(data);
+      // data.forEach( evento => {
+      //   this.calendarOptions!.events = [{
+      //     title: evento.nombreEvento,
+      //     start: evento.fechaEvento,
+      //     end: evento.fechaFinEvento
+      //   }]
+      // })
+    },  err => {
+      console.log(err);
+      alert("Usuario no valido en sistema");
+    })
+
+    console.log(yearMonth)
 
     this.calendarOptions!.events = [{
       title: 'Evento Coca Cola Fest',

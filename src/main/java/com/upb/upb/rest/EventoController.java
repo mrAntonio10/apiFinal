@@ -1,5 +1,6 @@
 package com.upb.upb.rest;
 
+import com.upb.upb.db.model.Evento;
 import com.upb.upb.db.service.EventoService;
 import com.upb.upb.request.EventoRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -94,6 +96,29 @@ public class EventoController {
 
             Map<String, Object> responseBody = new HashMap<>();
             responseBody.put("mensaje", "No se pudo cargar el evento, usuario con id: "+eventoDto.getUsuarioId()+" no encontrado");
+            responseBody.put("status", HttpStatus.NOT_FOUND.value() + " "+HttpStatus.NOT_FOUND.getReasonPhrase());
+            return ResponseEntity.badRequest().body(responseBody);
+        }
+        catch (Exception e){
+            log.info("Error inesperado en insertar evento{}", e);
+
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("mensaje", "No se pudo cargar el evento ni identificar el error");
+            return ResponseEntity.badRequest().body(responseBody);
+        }
+    }
+
+
+    @PutMapping("/borrarTodo")
+    public ResponseEntity<?> eliminarTodo(){
+        try{
+            List<Evento> eventosList = eventoService.getAll();
+            eventoService.eliminarTodo(eventosList);
+            return null;
+        } catch (NoSuchElementException e){
+            log.info("Error inesperado en insertar evento{}", e);
+
+            Map<String, Object> responseBody = new HashMap<>();
             responseBody.put("status", HttpStatus.NOT_FOUND.value() + " "+HttpStatus.NOT_FOUND.getReasonPhrase());
             return ResponseEntity.badRequest().body(responseBody);
         }

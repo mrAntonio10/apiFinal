@@ -9,8 +9,8 @@ export class Evento {
   fechaFinEvento: string = '';
   horaEvento: string = '';
   estadoEvento: boolean = false;
-  // @ts-ignore
-  usuario: Usuario;
+  username: string = '';
+  nombreCompleto: string = '';
 
 }
 

@@ -12,7 +12,7 @@ export class EventoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getArduinos(): Observable<Evento[]>{
+  getAll(): Observable<Evento[]>{
     return this.httpClient.get<Evento[]>(`${this.baseUrl}`)
   }
 

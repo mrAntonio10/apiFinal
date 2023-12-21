@@ -80,6 +80,7 @@ public class EventoServiceImpl implements EventoService {
 
         Optional<Evento> eventoOpt = eventoRepository.getEventoByIdAndEstadoFalse(eventoDto.getId());
 
+
         if(!eventoOpt.isPresent()) {    //Si no existe un evento se crea uno nuevo
             Evento evento = new Evento();
 
@@ -109,5 +110,28 @@ public class EventoServiceImpl implements EventoService {
             return evento.getId();
         }
 
+    }
+
+    @Override
+    public List<Evento> getAll() {
+        return eventoRepository.getEventosByEstadoEventoFalse();
+    }
+
+    @Override
+    public Long eliminarTodo(List<Evento> eventoList) {
+            for (Evento evento:eventoList
+            ) {
+                Optional<Evento> eventoOpt = eventoRepository.getEventoByIdAndEstadoFalse(evento.getId());
+                if(eventoOpt.isPresent()){
+                    Evento eventoConcurrence = eventoOpt.get();
+
+                    eventoConcurrence.setEstadoEvento(true);  //el estado eliminado es false al crear un evento
+
+                    eventoRepository.save(eventoConcurrence);
+                    log.info("se elimina el "+evento.getId());
+
+                }
+            }
+        return null;
     }
 }
